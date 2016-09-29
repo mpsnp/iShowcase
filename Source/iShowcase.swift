@@ -261,7 +261,7 @@ import Foundation
     private func setupBackground() {
         UIGraphicsBeginImageContextWithOptions(UIScreen.mainScreen().bounds.size,
             false, UIScreen.mainScreen().scale)
-        var context: CGContextRef? = UIGraphicsGetCurrentContext()
+        var context: CGContextRef = UIGraphicsGetCurrentContext()!
         CGContextSetFillColorWithColor(context, coverColor.CGColor)
         CGContextFillRect(context, containerView.bounds)
 
@@ -286,13 +286,13 @@ import Foundation
                 CGContextAddPath(context, UIBezierPath(rect: showcaseRect).CGPath)
                 CGContextDrawPath(context, .FillStroke)
 
-                let showcase = UIGraphicsGetImageFromCurrentImageContext()
+                let showcase = UIGraphicsGetImageFromCurrentImageContext()!
                 UIGraphicsEndImageContext()
 
                 // Clear region
                 UIGraphicsBeginImageContext(showcase.size)
                 showcase.drawAtPoint(CGPoint.zero)
-                context = UIGraphicsGetCurrentContext()
+                context = UIGraphicsGetCurrentContext()!
                 CGContextClearRect(context, showcaseRect)
             }
         } else {
