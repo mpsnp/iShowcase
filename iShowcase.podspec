@@ -14,4 +14,5 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Source/*.{swift,h}'
   s.frameworks = 'UIKit'
+  s.dependency 'SnapKit'
 end

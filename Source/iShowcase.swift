@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import SnapKit
 
 @objc public protocol iShowcaseDelegate: NSObjectProtocol {
     /**
@@ -122,8 +123,26 @@ import Foundation
         }
         draw()
         addSubview(showcaseImageView)
-        addSubview(titleLabel)
-        addSubview(detailsLabel)
+        
+        let groupingContainer = UIView()
+        groupingContainer.addSubview(titleLabel)
+        groupingContainer.addSubview(detailsLabel)
+        addSubview(groupingContainer)
+        
+        groupingContainer.snp_makeConstraints { (make) in
+            make.center.equalTo(self)
+            make.left.lessThanOrEqualTo(self).inset(15)
+        }
+        
+        titleLabel.snp_makeConstraints { (make) in
+            make.left.top.right.equalTo(groupingContainer)
+        }
+        
+        detailsLabel.snp_makeConstraints { (make) in
+            make.left.bottom.right.equalTo(groupingContainer)
+            make.top.equalTo(titleLabel.snp_bottom).offset(30)
+        }
+        
         addGestureRecognizer(getGestureRecgonizer())
     }
 
@@ -254,8 +273,8 @@ import Foundation
 
     private func draw() {
         setupBackground()
-        calculateRegion()
-        setupText()
+//        calculateRegion()
+//        setupText()
     }
 
     private func setupBackground() {
